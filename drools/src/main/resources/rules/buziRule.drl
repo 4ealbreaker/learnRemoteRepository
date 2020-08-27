@@ -1,0 +1,21 @@
+//逻辑上的包区分概念
+package buzi.rule1
+//导入的包
+import com.wxx.drools.entity.Demo
+//根据申请人的银行卡的数量进行规则判断
+rule "card_count_policy_0"
+    when
+         $demo:Demo(cardCount>5)//模式匹配到规则引擎中（规则内存中）查找Demo这个对象
+    then
+         $demo.setDecision("reflect this apply");
+         System.out.println($demo.getDecision());
+     end
+
+rule "card_count_policy_1"
+    when
+        $demo:Demo(name matches "王*")
+
+    then
+        $demo.setDecision("小王 is in blacklist reflect");
+        System.out.println($demo.getDecision());
+     end

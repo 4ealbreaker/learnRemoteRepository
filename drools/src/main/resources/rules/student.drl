@@ -1,0 +1,51 @@
+package student
+
+
+import com.wxx.drools.entity.Student
+
+global Student student
+
+
+rule "rule_student_retract_1"
+    when
+        $stu:Student(age == 26)
+    then
+        $stu.setTag("3");
+        retract($stu)
+        System.out.println("删除一个fact对象");
+end
+
+rule "rule_student_update_1"
+    when
+        $stu:Student($a:age > 20)
+    then
+        $stu.setTag("1");
+        $stu.setAge(9);
+        update($stu);
+        System.out.println("大于20修改tag为1");
+end
+
+rule "rule_student_update_2"
+    when
+        $stu:Student($a:age < 10)
+    then
+        $stu.setTag("2");
+        System.out.println("小于10修改tag为2");
+end
+
+
+
+rule "rule_student_insert_1"
+    when
+       Student(name matches "成龙")
+    then
+        Student s = new Student();
+        s.setName("李四");
+        s.setAge(26);
+        insert(s);
+        System.out.println("添加新人李四");
+end
+
+query student_query
+    $stu:Student(age == 11);
+    end

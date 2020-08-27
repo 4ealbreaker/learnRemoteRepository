@@ -1,0 +1,25 @@
+package test
+
+import com.wxx.drools.entity.Student
+function String sayhello(int age1){
+    if(age1 == 10){
+
+        return "hahah";
+    }
+}
+
+rule "stu_function_1"
+    when
+       $stu:Student(age == 0)
+    then
+    drools.halt();
+    System.out.println(sayhello(10));
+end
+rule "stu_function_2" extends "stu_function_1"
+    when
+       $stu:Student(age > 10)
+    then
+
+    System.out.println(sayhello(11));
+end
+
